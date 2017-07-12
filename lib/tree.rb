@@ -214,11 +214,11 @@ module Tree
     #   _zero-based_ indexing convention.
     #
     # @see #[]
-    def initialize(name, content = nil)
-      raise ArgumentError, "Node name HAS to be provided!" if name == nil
+    def initialize(name, content = nil, opts = {})
+      raise ArgumentError, "Node name HAS to be provided!" if name.nil?
       @name, @content = name, content
 
-      if name.kind_of?(Integer)
+      if opts[:ignore_integer_warning].nil? && name.kind_of?(Integer)
         warn "Using integer as node name."\
              " Semantics of TreeNode[] may not be what you expect!"\
              " #{name} #{content}"
